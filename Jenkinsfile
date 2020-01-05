@@ -94,9 +94,4 @@ pipeline {
       }
     }
   }
-  environment {
-    DOCKER_SERVER = credentials('DOCKER_SERVER')
-    DOCKER_USERNAME = credentials('DOCKER_USERNAME')
-    DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
-  }
 }
