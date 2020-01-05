@@ -27,7 +27,7 @@ if(postRC.equals(200)) {
 }
 }
 
-def createMultiBranchPipeline{
+def createMultiBranchPipeline(String repo_name){
 multibranchPipelineJob(String repo_name) {
     branchSources {
         git {
