@@ -28,7 +28,7 @@ if(postRC.equals(200)) {
 }
 
 def createMultiBranchPipeline(String repo_name){
-multibranchPipelineJob(String repo_name) {
+  multibranchPipelineJob("${repo_name}") {
     branchSources {
         git {
            // id('123456789') IMPORTANT: use a constant and unique identifier
