@@ -79,8 +79,11 @@ pipeline {
   stages {
     stage('Create Repo') {
       steps {
+        
         // Capture the values w.r.t application
+        script {
         createRepoTemplate("${repo_name}")
+        }
       }
     }
     stage('Create Pipeline') {
