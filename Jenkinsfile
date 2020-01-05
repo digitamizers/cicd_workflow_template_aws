@@ -1,9 +1,9 @@
-def createRepoTemplate(String repo_name){
+def createRepoTemplate(String repo_name_loc){
 def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template/generate"
 def conn = new URL(url).openConnection();
 def body = """{
   "owner": "lakshmanavinod",
-  "name": ${repo_name},
+  "name": ${repo_name_loc},
   "description": "This is your first repository",
   "private": false
 }"""
@@ -27,12 +27,12 @@ if(postRC.equals(200)) {
 }
 }
 
-def createMultiBranchPipeline(String repo_name){
-  multibranchPipelineJob("${repo_name}") {
+def createMultiBranchPipeline(String repo_name_loc){
+  multibranchPipelineJob("${repo_name_loc}") {
     branchSources {
         git {
            // id('123456789') IMPORTANT: use a constant and unique identifier
-            remote("https://github.com/lakshmanavinod/${repo_name}.git")
+            remote("https://github.com/lakshmanavinod/${repo_name_loc}.git")
             credentialsId('GIT-ACCESS')
         }
     }
@@ -44,8 +44,8 @@ def createMultiBranchPipeline(String repo_name){
 }
 
 }
-def registerWebhook(String repo_name){
-def url = "https://api.github.com/repos/lakshmanavinod/${repo_name}/hooks"
+def registerWebhook(String repo_name_loc){
+def url = "https://api.github.com/repos/lakshmanavinod/${repo_name_loc}/hooks"
 def conn = new URL(url).openConnection();
 def body = """{
   "config": {
