@@ -12,7 +12,7 @@ conn.setDoOutput(true)
 //Basic Authentication
 withCredentials([usernamePassword(credentialsId: 'GIT-ACCESS', passwordVariable: 'USER_PASSWD', usernameVariable: 'USER_NAME')]) {
     // some block
-String user_details = "${USER_NAME}"+":"+"${USER_PASSWD}"
+String user_details = "${env.USER_NAME}"+":"+"${env.USER_PASSWD}"
 }
 String auth = user_details.bytes.encodeBase64().toString()
 // End of Auth
@@ -59,7 +59,7 @@ conn.setDoOutput(true)
 //Basic Authentication
 withCredentials([usernamePassword(credentialsId: 'GIT-ACCESS', passwordVariable: 'USER_PASSWD', usernameVariable: 'USER_NAME')]) {
     // some block
-String user_details = "${USER_NAME}"+":"+"${USER_PASSWD}"
+String user_details = "${env.USER_NAME}"+":"+"${env.USER_PASSWD}"
 }
 String auth = user_details.bytes.encodeBase64().toString()
 // End of Auth
