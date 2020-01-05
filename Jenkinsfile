@@ -1,8 +1,8 @@
 def createRepoTemplate(String repo_name){
-def url = "https://api.github.com/repos/digitamizers/npm_cicd_template/generate"
+def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template/generate"
 def conn = new URL(url).openConnection();
 def body = """{
-  "owner": "digitamizers",
+  "owner": "lakshmanavinod",
   "name": ${repo_name},
   "description": "This is your first repository",
   "private": false
@@ -32,7 +32,7 @@ multibranchPipelineJob(String repo_name) {
     branchSources {
         git {
            // id('123456789') IMPORTANT: use a constant and unique identifier
-            remote("https://github.com/digitamizers/${repo_name}.git")
+            remote("https://github.com/lakshmanavinod/${repo_name}.git")
             credentialsId('GIT-ACCESS')
         }
     }
@@ -45,7 +45,7 @@ multibranchPipelineJob(String repo_name) {
 
 }
 def registerWebhook(String repo_name){
-def url = "https://api.github.com/repos/digitamizers/${repo_name}/hooks"
+def url = "https://api.github.com/repos/lakshmanavinod/${repo_name}/hooks"
 def conn = new URL(url).openConnection();
 def body = """{
   "config": {
