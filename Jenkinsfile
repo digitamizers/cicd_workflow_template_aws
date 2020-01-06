@@ -31,10 +31,11 @@ if(postRC.equals(200)) {
 }
 
 def createMultiBranchPipeline(String repo_name_loc){
-  multibranchPipelineJob("${repo_name_loc}") {
+
+jobDsl scriptText:"""multibranchPipelineJob("${repo_name_loc}") {
     branchSources {
         git {
-           // id('123456789') IMPORTANT: use a constant and unique identifier
+            id('123456789') // IMPORTANT: use a constant and unique identifier
             remote("https://github.com/lakshmanavinod/${repo_name_loc}.git")
             credentialsId('GIT-ACCESS')
         }
@@ -44,9 +45,10 @@ def createMultiBranchPipeline(String repo_name_loc){
             numToKeep(20)
         }
     }
-}
+}"""
 
 }
+@NonCPS
 def registerWebhook(String repo_name_loc){
 def url = "https://api.github.com/repos/lakshmanavinod/${repo_name_loc}/hooks"
 def conn = new URL(url).openConnection();
@@ -60,10 +62,10 @@ def body = """{
 conn.setRequestMethod("POST")
 conn.setDoOutput(true)
 //Basic Authentication
-withCredentials([usernamePassword(credentialsId: 'GIT-ACCESS', passwordVariable: 'USER_PASSWD', usernameVariable: 'USER_NAME')]) {
+//withCredentials([usernamePassword(credentialsId: 'GIT-ACCESS', passwordVariable: 'USER_PASSWD', usernameVariable: 'USER_NAME')]) {
     // some block
-String user_details = "${env.USER_NAME}"+":"+"${env.USER_PASSWD}"
-}
+String user_details = "${GIT_USERNAME}"+":"+"${GIT_PASSWORD}"
+//}
 String auth = user_details.bytes.encodeBase64().toString()
 // End of Auth
 conn.setRequestProperty("Authorization","Basic "+ auth);
