@@ -1,19 +1,21 @@
-def createRepoTemplate(String repo_name_loc){
-def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template/generate"
-def conn = new URL(url).openConnection();
-def body = """{
+@NonCPS
+def createRepoTemplate(String repo_name_loc) {
+ //def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template/generate"
+ def url = "https://api.github.com/repos/lakshmanavinod/devops_templates/generate"
+ def conn = new URL(url).openConnection()
+ def body = """{
   "owner": "lakshmanavinod",
-  "name": ${repo_name_loc},
+  "name": "${repo_name_loc}",
   "description": "This is your first repository",
   "private": false
 }"""
 conn.setRequestMethod("POST")
 conn.setDoOutput(true)
 //Basic Authentication
-withCredentials([usernamePassword(credentialsId: 'GIT-ACCESS', passwordVariable: 'USER_PASSWD', usernameVariable: 'USER_NAME')]) {
+//withCredentials([usernamePassword(credentialsId: 'GIT-ACCESS', passwordVariable: 'USER_PASSWD', usernameVariable: 'USER_NAME')]) {
     // some block
-String user_details = "${env.USER_NAME}"+":"+"${env.USER_PASSWD}"
-}
+String user_details = "${GIT_USERNAME}"+":"+"${GIT_PASSWORD}"
+//}
 String auth = user_details.bytes.encodeBase64().toString()
 // End of Auth
 conn.setRequestProperty("Authorization","Basic "+ auth);
@@ -21,6 +23,7 @@ conn.setRequestProperty("Content-Type", "application/json");
 conn.setRequestProperty("Accept", "application/vnd.github.baptiste-preview+json");
 conn.getOutputStream().write(body.getBytes("UTF-8"));
 def postRC = conn.getResponseCode();
+//conn.close()
 println(postRC);
 if(postRC.equals(200)) {
     println(conn.getInputStream().getText());
@@ -79,11 +82,7 @@ pipeline {
   stages {
     stage('Create Repo') {
       steps {
-        
-        // Capture the values w.r.t application
-        script {
         createRepoTemplate("${repo_name}")
-        }
       }
     }
     stage('Create Pipeline') {
@@ -97,7 +96,7 @@ pipeline {
       }
     }
   }
-    environment {
+      environment {
     GIT_USERNAME = credentials('GIT_USERNAME')
     GIT_PASSWORD = credentials('GIT_PASSWORD')
   }
