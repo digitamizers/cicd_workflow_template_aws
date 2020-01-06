@@ -97,4 +97,8 @@ pipeline {
       }
     }
   }
+    environment {
+    GIT_USERNAME = credentials('GIT_USERNAME')
+    GIT_PASSWORD = credentials('GIT_PASSWORD')
+  }
 }
