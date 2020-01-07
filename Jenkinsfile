@@ -1,7 +1,7 @@
 @NonCPS
 def createRepoTemplate(String repo_name_loc) {
  //def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template/generate"
- def url = "https://api.github.com/repos/lakshmanavinod/devops_templates/generate"
+ def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template/generate"
  def conn = new URL(url).openConnection()
  def body = """{
   "owner": "lakshmanavinod",
@@ -35,7 +35,7 @@ def createMultiBranchPipeline(String repo_name_loc){
 jobDsl scriptText:"""multibranchPipelineJob("${repo_name_loc}") {
     branchSources {
         git {
-            id('123456789') // IMPORTANT: use a constant and unique identifier
+            id("${repo_name_loc}") // IMPORTANT: use a constant and unique identifier
             remote("https://github.com/lakshmanavinod/${repo_name_loc}.git")
             credentialsId('GIT-ACCESS')
         }
