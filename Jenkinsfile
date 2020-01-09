@@ -45,6 +45,9 @@ jobDsl scriptText:"""multibranchPipelineJob("${repo_name_loc}") {
             numToKeep(20)
         }
     }
+    triggers {   
+       periodic(24 * 60) //every 24 hours
+    }
 }"""
 
 }
