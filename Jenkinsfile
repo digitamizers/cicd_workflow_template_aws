@@ -36,7 +36,7 @@ jobDsl scriptText:"""multibranchPipelineJob("${repo_name_loc}") {
     branchSources {
         git {
             id("${repo_name_loc}") // IMPORTANT: use a constant and unique identifier
-            remote("https://github.com/digitamizers/${repo_name_loc}.git")
+            remote("https://github.com/lakshmanavinod/${repo_name_loc}.git")
             credentialsId('GIT-ACCESS')
         }
     }
