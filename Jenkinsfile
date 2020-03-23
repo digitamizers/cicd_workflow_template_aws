@@ -32,7 +32,7 @@ if(postRC.equals(200)) {
 
 def createMultiBranchPipeline(String repo_name_loc){
 
-jobDsl scriptText:"""multibranchPipelineJob("${repo_name_loc}") {
+jobDsl scriptText:"""multibranchPipelineJob("DEVOPS_WORKFLOW/${repo_name_loc}") {
     branchSources {
         git {
             id("${repo_name_loc}") // IMPORTANT: use a constant and unique identifier
