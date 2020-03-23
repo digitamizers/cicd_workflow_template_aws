@@ -1,7 +1,7 @@
 @NonCPS
 def createRepoTemplate(String repo_name_loc) {
  //def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template/generate"
- def url = "https://api.github.com/repos/digitamizers/npm_cicd_template_aws/generate"
+ def url = "https://api.github.com/repos/lakshmanavinod/npm_cicd_template_aws/generate"
  def conn = new URL(url).openConnection()
  def body = """{
   "owner": "lakshmanavinod",
