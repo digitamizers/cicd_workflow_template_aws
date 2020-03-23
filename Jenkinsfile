@@ -7,7 +7,7 @@ def createRepoTemplate(String repo_name_loc) {
   "owner": "lakshmanavinod",
   "name": "${repo_name_loc}",
   "description": "This is your first repository",
-  "private": false
+  "private": true
 }"""
 conn.setRequestMethod("POST")
 conn.setDoOutput(true)
