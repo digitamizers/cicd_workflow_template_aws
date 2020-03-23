@@ -53,7 +53,7 @@ jobDsl scriptText:"""multibranchPipelineJob("${repo_name_loc}") {
 }
 @NonCPS
 def registerWebhook(String repo_name_loc){
-def url = "https://api.github.com/repos/digitamizers/${repo_name_loc}/hooks"
+def url = "https://api.github.com/repos/lakshmanavinod/${repo_name_loc}/hooks"
 def conn = new URL(url).openConnection();
 def body = """{
   "config": {
