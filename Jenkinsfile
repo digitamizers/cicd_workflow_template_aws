@@ -59,7 +59,8 @@ def body = """{
   "config": {
     "url": "http://cicd.jenkins.techforce.ai/github-webhook/",
     "content_type": "json",
-    "insecure_ssl": "0"
+    "insecure_ssl": "0",
+    "private": true
   }
 }"""
 conn.setRequestMethod("POST")
